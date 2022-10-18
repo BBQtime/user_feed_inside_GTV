@@ -9,7 +9,7 @@ import random
 from multiprocessing import Pool
 
 def simulate_user_feeds(gtv_path):
-    out_put_path = gtv_path.replace('labelsTr', 'imagesTr')
+    out_put_path = gtv_path.replace('labelsOd', 'imagesOd')
     out_put_path = out_put_path.replace('.nii.gz','_0004.nii.gz')
     print(out_put_path)
     img = sitk.ReadImage(gtv_path)
@@ -25,13 +25,13 @@ def simulate_user_feeds(gtv_path):
 
     new_arr = np.zeros(arr.shape)
     for region in regionprops(label_image):
-
+        
         bbox = region.bbox
         point_not_found = True
         iterations = 0
-        if region.area>800: # only label volume larger than 1000 pixels
+        if region.area>100: # only label volume larger than 1000 pixels
             
-            while point_not_found and iterations<10000000:
+            while point_not_found and iterations<100000:
                 radius = random.choice([2,3,4,5])           
                 iterations+=1
                 x = random.choice(np.linspace(bbox[0], bbox[3], dtype=int))
@@ -61,12 +61,12 @@ def simulate_user_feeds(gtv_path):
     sitk.WriteImage(new_img,out_put_path)
 
 if __name__ == '__main__':
-    work_path = '/data/jintao/nnUNet/nnUNet_raw_data_base/nnUNet_raw_data/Task101_auh/labelsTr/'
+    work_path = '/data/jintao/nnUNet/nnUNet_raw_data_base/nnUNet_raw_data/Task102_auh_od2/labelsOd'
     gtv_path = glob.glob(os.path.join(work_path, '*'))
     # for path in gtv_path:
     #     simulate_user_feeds(path)
 
     
     # #compare(files[0])
-    with Pool(16) as p:
+    with Pool(64) as p:
         p.map(simulate_user_feeds, gtv_path)
