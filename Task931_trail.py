@@ -99,9 +99,7 @@ if __name__ == "__main__":
                              train_patients]
 
 
-    json_dict['test'] =  [{'image': "./imagesTs/%s.nii.gz" % i, "label": "./labelsTs/%s.nii.gz" % i} for i in
-                          test_patients]
-    json_dict['od'] =  [{'image': "./imagesOd/%s.nii.gz" % i, "label": "./labelsOd/%s.nii.gz" % i} for i in
-                          od_patients]
+    json_dict['test'] =  ["./labelsTs/%s.nii.gz" % i for i in test_patients]
+    json_dict['od'] =  ["./labelsOd/%s.nii.gz" % i for i in od_patients]
    
     save_json(json_dict, join(target_base, "dataset.json"))

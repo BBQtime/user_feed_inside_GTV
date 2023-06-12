@@ -25,7 +25,7 @@ def small_volumes(gtv_path):
 
 def simulate_user_feeds(gtv_path):
     iter_limit = 10000
-    out_put_path = gtv_path.replace('labelsOd', 'imagesOd')
+    out_put_path = gtv_path.replace('labelsTr', 'imagesTr')
     out_put_path = out_put_path.replace('.nii.gz','_0004.nii.gz')
     #print(out_put_path)
     img = sitk.ReadImage(gtv_path)
@@ -84,7 +84,9 @@ def simulate_user_feeds(gtv_path):
     sitk.WriteImage(new_img,out_put_path)
 
 if __name__ == '__main__':
-    work_path = '/data/jintao/nnUNet/nnUNet_raw_data_base/nnUNet_raw_data/Task102_auh_od2/labelsOd'
+    work_path = '/mnt/data/jintao/nnUNet/nnUNet_raw_data_base/nnUNet_raw_data/Task001_user/labelsTr'
+
+    # '/mnt/data/jintao/nnUNet/nnUNet_raw_data_base/nnUNet_raw_data/Task931_trail/'
     gtv_path = glob.glob(os.path.join(work_path, '*'))
     # for path in gtv_path:
     #     simulate_user_feeds(path)
