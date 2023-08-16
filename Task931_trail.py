@@ -68,8 +68,8 @@ if __name__ == "__main__":
 
             shutil.copy(ct, join(target_images, patient_name + "_0000.nii.gz"))
             shutil.copy(pt, join(target_images, patient_name + "_0001.nii.gz"))
-            shutil.copy(pt, join(target_images, patient_name + "_0002.nii.gz"))
-            shutil.copy(pt, join(target_images, patient_name + "_0003.nii.gz"))
+            shutil.copy(t1, join(target_images, patient_name + "_0002.nii.gz"))
+            shutil.copy(t2, join(target_images, patient_name + "_0003.nii.gz"))
             shutil.copy(gtv, join(target_labels, patient_name + ".nii.gz"))
 
         #copy_BraTS_segmentation_and_convert_labels(seg, join(target_labelsTr, patient_name + ".nii.gz"))
